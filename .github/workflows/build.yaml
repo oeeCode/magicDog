@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'graalvm'
-          architecture: 'aarch64'
+          components: 'native-image'
           cache: 'gradle'
 
       - name: Build native image
