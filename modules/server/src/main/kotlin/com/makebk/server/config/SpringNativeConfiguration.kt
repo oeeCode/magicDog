@@ -21,6 +21,7 @@ class SpringNativeConfiguration {
         private fun registerResourceHints(hints: RuntimeHints) {
             hints.resources().registerPattern("banner.txt")
             hints.resources().registerPattern("doc.yml")
+            hints.resources().registerPattern("ai.yml")
             hints.resources().registerPattern("logger.yml")
             hints.resources().registerPattern("captcha.yml")
             hints.resources().registerPattern("database.yml")

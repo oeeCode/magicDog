@@ -39,6 +39,7 @@ spring:
       - database.yml
       - mybatis.yml
       - security.yml
+      - ai.yml
   web.resources.add-mappings: false
 
 ---

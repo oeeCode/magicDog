@@ -34,22 +34,18 @@ jobs:
           arguments: nativeCompile
           gradle-version: wrapper
 
-      - run: echo "🐶 查看当前目录文件" & ls
-      - name: "上传打包文件到服务器"
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST}}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "."
-          target: "/file/${{ matrix.os }}"
+      - name: Make staging directory
+        run: mkdir staging
 
-      - name: Deploy
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Gluon Build and Package
+        run: mvn -Pdesktop gluonfx:build gluonfx:package
+
+      - name: Copy native bundles to staging
+        run: |
+          cp -r modules\server\build\native\nativeCompile\server staging
+      - name: Upload
+        uses: actions/upload-artifact@v3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            docker-compose -f /file/${{ matrix.os }}/script/docker-compose.yml up --build -d
+          name: Server-Windows
+          path: staging
+          retention-days: 1

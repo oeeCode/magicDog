@@ -1,0 +1,10 @@
+spring:
+  ai:
+    vertex:
+      gemini:
+        project-id: gboot-ee88f
+        location: LOCATION
+        chat:
+          options:
+            model: gemini-2.0-flash
+            temperature: 0.5
