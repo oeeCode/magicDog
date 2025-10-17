@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ windows-latest ]
+        os: [ windows-latest ,windows-11-arm ]
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 #    container:
@@ -19,7 +19,7 @@ jobs:
 #        - ubuntu_hostedtoolcache:/opt/hostedtoolcache
     steps:
       - run: echo "🍎 当前时间" & date
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: graalvm/setup-graalvm@v1
         with:
