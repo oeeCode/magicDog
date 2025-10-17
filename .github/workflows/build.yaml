@@ -20,7 +20,8 @@ jobs:
     steps:
       - run: echo "🍎 当前时间" & date
       - uses: actions/checkout@v5
-      - uses: graalvm/setup-graalvm@v1.2
+
+      - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
           distribution: 'liberica'
