@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ windows-latest ]
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 #    container:
@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "."
-          target: "/file/${{ matrix.os }}}"
+          target: "/file/${{ matrix.os }}"
 
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
