@@ -31,10 +31,7 @@ jobs:
         uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
-
-          # 关键修正: 使用 'graalvm-for-jdk' 来指定 Oracle GraalVM
-          distribution: 'graalvm-for-jdk'
-
+          distribution: 'liberica'
           components: 'native-image'
           cache: 'gradle'
           github-token: ${{ secrets.GITHUB_TOKEN }}
