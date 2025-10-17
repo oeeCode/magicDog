@@ -44,7 +44,7 @@ jobs:
         run: |
           cp -r modules\server\build\native\nativeCompile\server staging
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Server-Windows
           path: staging
