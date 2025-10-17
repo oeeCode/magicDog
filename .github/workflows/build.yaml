@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  # 也可以保留 label 触发器
   label:
     types:
       - created
@@ -13,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        # 保持 windows-11-arm
+        # 强制要求：原生镜像构建必须在与目标平台和架构完全一致的 runner 上执行。
         os: [ windows-11-arm ]
 
     name: Build on ${{ matrix.os }}
@@ -26,34 +25,37 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 步骤 1: 设置 Oracle GraalVM for JDK
+      # 步骤 1: 设置 GraalVM，明确指定使用 BellSoft 的 Liberica 发行版
       - name: Set up GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '21'
+          # 关键修正：指定 'liberica' 发行版，以获取对 Windows on ARM64 的支持。
           distribution: 'liberica'
+          java-version: '21'
           components: 'native-image'
           cache: 'gradle'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 步骤 2: (推荐) 验证安装
+      # 步骤 2: (推荐) 验证 GraalVM 安装
       - name: Verify GraalVM installation
         run: |
           java -version
           native-image --version
 
-      # 步骤 3: 使用 run 命令直接构建，而不是用 gradle/actions/setup-gradle
+      # 步骤 3: 使用 Gradle 构建原生镜像
       - name: Build Native Image with Gradle
-        run: ./gradlew.bat nativeCompile
+        run:./gradlew.bat nativeCompile
 
+      # 步骤 4: 创建用于存放构建产物的目录
       - name: Create staging directory
         run: mkdir staging
 
-      # 步骤 4: 修正 Windows 上的文件复制命令
+      # 步骤 5: 将原生可执行文件复制到 staging 目录
       - name: Copy native bundles to staging
-        # 在 Windows 上，使用 'copy' 命令而不是 'cp'
+        # 语法修正：使用正确的 Windows 'copy' 命令和通配符路径。
         run: copy modules\server\build\native\nativeCompile\* staging
 
+      # 步骤 6: 上传构建产物
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
