@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ windows-latest ,windows-11-arm ]
+        os: [ windows-latest , windows-11-arm ]
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 #    container:
@@ -20,11 +20,10 @@ jobs:
     steps:
       - run: echo "🍎 当前时间" & date
       - uses: actions/checkout@v5
-
-      - uses: graalvm/setup-graalvm@v1
+      - uses: graalvm/setup-graalvm@v1.2
         with:
           java-version: '21'
-          distribution: 'graalvm'
+          distribution: 'liberica'
           cache: 'gradle'
 
       - name: Build native image
