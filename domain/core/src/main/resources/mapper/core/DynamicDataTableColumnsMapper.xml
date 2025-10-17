@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.DynamicDataTableColumnsMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.DynamicDataTableColumns">
+                    <id column="id" property="id"/>
+                    <result column="table_id" property="tableId"/>
+                    <result column="creator" property="creator"/>
+                    <result column="updater" property="updater"/>
+                    <result column="status" property="status"/>
+                    <result column="c_time" property="cTime"/>
+                    <result column="u_time" property="uTime"/>
+                    <result column="is_del" property="isDel"/>
+                    <result column="key" property="key"/>
+                    <result column="type" property="type"/>
+                    <result column="fixed" property="fixed"/>
+                    <result column="width" property="width"/>
+                    <result column="min_width" property="minWidth"/>
+                    <result column="max_width" property="maxWidth"/>
+                    <result column="class_name" property="className"/>
+                    <result column="tilte" property="tilte"/>
+                    <result column="align" property="align"/>
+                    <result column="title_align" property="titleAlign"/>
+                    <result column="ellipsis" property="ellipsis"/>
+                    <result column="resizable" property="resizable"/>
+                    <result column="sort_order" property="sortOrder"/>
+                    <result column="render" property="render"/>
+                    <result column="seq" property="seq"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, table_id, creator, updater, status, c_time, u_time, is_del, key, type, fixed, width, min_width, max_width, class_name, tilte, align, title_align, ellipsis, resizable, sort_order, render, seq
+        </sql>
+
+    <sql id="TableName">
+        dynamic_data_table_columns
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

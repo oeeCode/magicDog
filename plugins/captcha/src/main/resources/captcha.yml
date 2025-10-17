@@ -1,0 +1,21 @@
+aj:
+  captcha:
+    jigsaw: classpath:images/jigsaw
+    pic-click: classpath:images/pic-click
+    cache-type: redis
+    cache-number: 1000
+    timing-clear: 180
+    type: default
+    water-mark: 五常市人民法院报名系统
+    slip-offset: 5
+    aes-status: true
+    interference-options: 2
+    font-style: 1
+    font-size: 18
+    history-data-clear-enable: false
+    req-frequency-limit-enable: false
+    req-get-lock-limit: 5
+    req-get-lock-seconds: 360
+    req-get-minute-limit: 30
+    req-check-minute-limit: 60
+    req-verify-minute-limit: 60

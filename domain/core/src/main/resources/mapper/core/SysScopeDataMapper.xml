@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.SysScopeDataMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.SysScopeData">
+                    <id column="id" property="id"/>
+                    <result column="resource_id" property="resourceId"/>
+                    <result column="resource_code" property="resourceCode"/>
+                    <result column="scope_name" property="scopeName"/>
+                    <result column="scope_field" property="scopeField"/>
+                    <result column="scope_class" property="scopeClass"/>
+                    <result column="scope_column" property="scopeColumn"/>
+                    <result column="scope_type" property="scopeType"/>
+                    <result column="scope_value" property="scopeValue"/>
+                    <result column="remark" property="remark"/>
+                    <result column="creator" property="creator"/>
+                    <result column="updater" property="updater"/>
+                    <result column="c_time" property="cTime"/>
+                    <result column="u_time" property="uTime"/>
+                    <result column="status" property="status"/>
+                    <result column="is_del" property="isDel"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, resource_id, resource_code, scope_name, scope_field, scope_class, scope_column, scope_type, scope_value, remark, creator, updater, c_time, u_time, status, is_del
+        </sql>
+
+    <sql id="TableName">
+        sys_scope_data
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

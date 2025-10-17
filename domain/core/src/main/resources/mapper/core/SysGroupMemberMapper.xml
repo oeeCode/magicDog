@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.SysGroupMemberMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.SysGroupMember">
+                    <id column="id" property="id"/>
+                    <result column="group_id" property="groupId"/>
+                    <result column="member_id" property="memberId"/>
+                    <result column="is_del" property="isDel"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, group_id, member_id, is_del
+        </sql>
+
+    <sql id="TableName">
+        sys_group_member
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

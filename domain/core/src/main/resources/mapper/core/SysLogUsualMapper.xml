@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.SysLogUsualMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.SysLogUsual">
+                    <id column="id" property="id"/>
+                    <result column="tenants_id" property="tenantsId"/>
+                    <result column="service_id" property="serviceId"/>
+                    <result column="server_host" property="serverHost"/>
+                    <result column="server_ip" property="serverIp"/>
+                    <result column="env" property="env"/>
+                    <result column="log_level" property="logLevel"/>
+                    <result column="log_id" property="logId"/>
+                    <result column="log_data" property="logData"/>
+                    <result column="method" property="method"/>
+                    <result column="request_uri" property="requestUri"/>
+                    <result column="remote_ip" property="remoteIp"/>
+                    <result column="method_class" property="methodClass"/>
+                    <result column="method_name" property="methodName"/>
+                    <result column="user_agent" property="userAgent"/>
+                    <result column="params" property="params"/>
+                    <result column="time" property="time"/>
+                    <result column="create_by" property="createBy"/>
+                    <result column="create_time" property="createTime"/>
+                    <result column="create_by_name" property="createByName"/>
+                    <result column="is_del" property="isDel"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, tenants_id, service_id, server_host, server_ip, env, log_level, log_id, log_data, method, request_uri, remote_ip, method_class, method_name, user_agent, params, time, create_by, create_time, create_by_name, is_del
+        </sql>
+
+    <sql id="TableName">
+        sys_log_usual
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

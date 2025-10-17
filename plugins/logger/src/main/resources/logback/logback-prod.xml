@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="10 seconds">
+    <property resource="application.yml"/>
+    <springProperty scope="context" name="LOG_NAME" source="spring.application.name"/>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+</configuration>

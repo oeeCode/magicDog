@@ -1,0 +1,37 @@
+spring:
+  data:
+    redis:
+      redis:
+        repositories:
+          enabled: false
+  redis:
+    redisson:
+      config: |
+        singleServerConfig:
+          address: redis://100.78.145.96:6379
+          password: redis_2CzQh6
+          database: 4
+          connectTimeout: 10000
+          timeout: 3000
+          connectionMinimumIdleSize: 8
+          connectionPoolSize: 16
+        codec: !<org.redisson.codec.Kryo5Codec> {}
+        lazyInitialization: true
+        transportMode: "NIO"
+  datasource:
+    hikari:
+      jdbcUrl: jdbc:mysql://100.78.145.96:3306/dog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+      driverClassName: com.mysql.cj.jdbc.Driver
+      password: ed6Xwy2GGjZ85D4Z
+      username: dog
+      minimum-idle: 10
+      idle-timeout: 600000
+      maximum-pool-size: 500
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  aop:
+    enabled: true
+  lazy: true

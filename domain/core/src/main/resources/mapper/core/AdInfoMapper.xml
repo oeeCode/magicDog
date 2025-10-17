@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.AdInfoMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.AdInfo">
+                    <id column="id" property="id"/>
+                    <result column="ad_code" property="adCode"/>
+                    <result column="ad_name" property="adName"/>
+                    <result column="ad_type" property="adType"/>
+                    <result column="ad_content" property="adContent"/>
+                    <result column="ad_link" property="adLink"/>
+                    <result column="target_type" property="targetType"/>
+                    <result column="position_code" property="positionCode"/>
+                    <result column="page_code" property="pageCode"/>
+                    <result column="priority" property="priority"/>
+                    <result column="start_time" property="startTime"/>
+                    <result column="end_time" property="endTime"/>
+                    <result column="status" property="status"/>
+                    <result column="show_count" property="showCount"/>
+                    <result column="click_count" property="clickCount"/>
+                    <result column="conversion_count" property="conversionCount"/>
+                    <result column="cost_type" property="costType"/>
+                    <result column="cost_amount" property="costAmount"/>
+                    <result column="daily_budget" property="dailyBudget"/>
+                    <result column="total_budget" property="totalBudget"/>
+                    <result column="creator" property="creator"/>
+                    <result column="updater" property="updater"/>
+                    <result column="c_time" property="cTime"/>
+                    <result column="u_time" property="uTime"/>
+                    <result column="version" property="version"/>
+                    <result column="is_del" property="isDel"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, ad_code, ad_name, ad_type, ad_content, ad_link, target_type, position_code, page_code, priority, start_time, end_time, status, show_count, click_count, conversion_count, cost_type, cost_amount, daily_budget, total_budget, creator, updater, c_time, u_time, version, is_del
+        </sql>
+
+    <sql id="TableName">
+        ad_info
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

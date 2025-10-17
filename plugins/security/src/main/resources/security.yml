@@ -1,0 +1,21 @@
+jwt:
+  token-header: Authorization
+  platformHeader: platform
+  platform: server
+  local: X-Local
+  expire: 86400
+  refreshCheckTime: 604800
+  shiroCacheExpireTime: 86400
+  secretKey: xx1WET12^%3^(WE45
+permission:
+  perms:
+    - key: /file/uploadEditor
+      value: anon
+    - key: /captcha
+      value: anon
+    - key: /logout
+      value: logout
+    - key: /login
+      value: anon
+    - key: /**
+      value: auth

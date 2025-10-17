@@ -1,0 +1,35 @@
+package com.makebk.common.constant
+
+object SqlConstant {
+    const val SQL_REGEX: String =
+        "'|%|--|insert|delete|select|count|group|union|drop|truncate|alter|grant|execute|exec|xp_cmdshell|call|declare|sql"
+    const val EQUAL: String = "_equal"
+    const val NOT_EQUAL: String = "_notequal"
+    const val LIKE: String = "_like"
+    const val NOT_LIKE: String = "_notlike"
+    const val RIGHT_LIKE: String = "_rightlike"
+    const val LEFT_LIKE: String = "_leftlike"
+    const val GT: String = "_gt"
+    const val LT: String = "_lt"
+    const val GE: String = "_ge"
+    const val LE: String = "_le"
+    const val TIMESTAMP_GT: String = "_timestampgt"
+    const val TIMESTAMP_EQUAL: String = "_timestampequal"
+    const val TIMESTAMP_LT: String = "_timestamplt"
+    const val TIMESTAMP_BT: String = "_timestampbt"
+    const val DATE_GT: String = "_dategt"
+    const val DATE_EQUAL: String = "_dateequal"
+    const val DATE_LT: String = "_datelt"
+    const val DATE_BT: String = "_datebt"
+    const val DATE_STR_GT: String = "_date_str_gt"
+    const val DATE_STR_EQUAL: String = "_date_str_equal"
+    const val DATE_STR_LT: String = "_date_str_lt"
+    const val DATE_STR_BT: String = "_date_str_bt"
+    const val IN: String = "_in"
+    const val NOTIN: String = "_notin"
+    const val IS_NULL: String = "_null"
+    const val NOT_NULL: String = "_notnull"
+    const val IGNORE: String = "_ignore"
+    const val NULL: String = "null"
+
+}

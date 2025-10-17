@@ -1,0 +1,8 @@
+#数据库驱动名，如果不指定，则会根据url自动判定
+driver = com.mysql.jdbc.Driver
+#JDBC url，必须
+url = jdbc:mysql://100.78.145.96:3306/dog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+#用户名，必须
+user = dog
+#密码，必须
+password = ed6Xwy2GGjZ85D4Z

@@ -1,0 +1,24 @@
+version: "3"
+services:
+  dot_server:
+    build:
+      dockerfile: ./docker/Dockerfile
+      context: ../modules/server
+      args:
+        - buildno=1
+    image: dot_server:latest
+    container_name: dot_server
+    networks:
+      - dog
+    ports:
+      - 7777:7777
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    restart: on-failure
+networks:
+  dog:
+    driver: bridge
+
+

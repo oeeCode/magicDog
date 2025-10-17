@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.AdShowStatisticsMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.AdShowStatistics">
+                    <id column="id" property="id"/>
+                    <result column="ad_id" property="adId"/>
+                    <result column="ad_code" property="adCode"/>
+                    <result column="position_code" property="positionCode"/>
+                    <result column="page_code" property="pageCode"/>
+                    <result column="show_date" property="showDate"/>
+                    <result column="show_hour" property="showHour"/>
+                    <result column="show_count" property="showCount"/>
+                    <result column="click_count" property="clickCount"/>
+                    <result column="conversion_count" property="conversionCount"/>
+                    <result column="ip_count" property="ipCount"/>
+                    <result column="uv_count" property="uvCount"/>
+                    <result column="c_time" property="cTime"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, ad_id, ad_code, position_code, page_code, show_date, show_hour, show_count, click_count, conversion_count, ip_count, uv_count, c_time
+        </sql>
+
+    <sql id="TableName">
+        ad_show_statistics
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

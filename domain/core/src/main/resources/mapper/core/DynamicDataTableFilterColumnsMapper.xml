@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.DynamicDataTableFilterColumnsMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.DynamicDataTableFilterColumns">
+                    <id column="id" property="id"/>
+                    <result column="table_id" property="tableId"/>
+                    <result column="label" property="label"/>
+                    <result column="name" property="name"/>
+                    <result column="creator" property="creator"/>
+                    <result column="updater" property="updater"/>
+                    <result column="status" property="status"/>
+                    <result column="c_time" property="cTime"/>
+                    <result column="u_time" property="uTime"/>
+                    <result column="is_del" property="isDel"/>
+                    <result column="seq" property="seq"/>
+                    <result column="placeholder" property="placeholder"/>
+                    <result column="tips" property="tips"/>
+                    <result column="disabled" property="disabled"/>
+                    <result column="value" property="value"/>
+                    <result column="size" property="size"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, table_id, label, name, creator, updater, status, c_time, u_time, is_del, seq, placeholder, tips, disabled, value, size
+        </sql>
+
+    <sql id="TableName">
+        dynamic_data_table_filter_columns
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

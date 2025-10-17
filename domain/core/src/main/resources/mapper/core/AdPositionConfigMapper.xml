@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.AdPositionConfigMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.AdPositionConfig">
+                    <id column="id" property="id"/>
+                    <result column="position_code" property="positionCode"/>
+                    <result column="position_name" property="positionName"/>
+                    <result column="page_code" property="pageCode"/>
+                    <result column="page_name" property="pageName"/>
+                    <result column="position_type" property="positionType"/>
+                    <result column="position_size" property="positionSize"/>
+                    <result column="position_style" property="positionStyle"/>
+                    <result column="max_ads" property="maxAds"/>
+                    <result column="display_mode" property="displayMode"/>
+                    <result column="refresh_interval" property="refreshInterval"/>
+                    <result column="enable_switch" property="enableSwitch"/>
+                    <result column="target_devices" property="targetDevices"/>
+                    <result column="target_platforms" property="targetPlatforms"/>
+                    <result column="target_regions" property="targetRegions"/>
+                    <result column="description" property="description"/>
+                    <result column="creator" property="creator"/>
+                    <result column="updater" property="updater"/>
+                    <result column="c_time" property="cTime"/>
+                    <result column="u_time" property="uTime"/>
+                    <result column="version" property="version"/>
+                    <result column="is_del" property="isDel"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, position_code, position_name, page_code, page_name, position_type, position_size, position_style, max_ads, display_mode, refresh_interval, enable_switch, target_devices, target_platforms, target_regions, description, creator, updater, c_time, u_time, version, is_del
+        </sql>
+
+    <sql id="TableName">
+        ad_position_config
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

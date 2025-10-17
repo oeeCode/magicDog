@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.DynamicDataFormButtonsMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.DynamicDataFormButtons">
+                    <id column="id" property="id"/>
+                    <result column="form_id" property="formId"/>
+                    <result column="type" property="type"/>
+                    <result column="size" property="size"/>
+                    <result column="permissions" property="permissions"/>
+                    <result column="text" property="text"/>
+                    <result column="display_type" property="displayType"/>
+                    <result column="icon" property="icon"/>
+                    <result column="event" property="event"/>
+                    <result column="updater" property="updater"/>
+                    <result column="creator" property="creator"/>
+                    <result column="status" property="status"/>
+                    <result column="c_time" property="cTime"/>
+                    <result column="u_time" property="uTime"/>
+                    <result column="is_del" property="isDel"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, form_id, type, size, permissions, text, display_type, icon, event, updater, creator, status, c_time, u_time, is_del
+        </sql>
+
+    <sql id="TableName">
+        dynamic_data_form_buttons
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

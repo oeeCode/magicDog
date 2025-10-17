@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makebk.domain.core.infrastructure.mapper.SysResourceNextMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.makebk.domain.core.entits.SysResourceNext">
+                    <id column="id" property="id"/>
+                    <result column="title" property="title"/>
+                    <result column="belong" property="belong"/>
+                    <result column="i18n_key" property="i18nKey"/>
+                    <result column="type" property="type"/>
+                    <result column="code" property="code"/>
+                    <result column="component" property="component"/>
+                    <result column="hide_menu" property="hideMenu"/>
+                    <result column="constant" property="constant"/>
+                    <result column="icon" property="icon"/>
+                    <result column="path" property="path"/>
+                    <result column="parent_id" property="parentId"/>
+                    <result column="sort" property="sort"/>
+                    <result column="creator" property="creator"/>
+                    <result column="updater" property="updater"/>
+                    <result column="status" property="status"/>
+                    <result column="c_time" property="cTime"/>
+                    <result column="u_time" property="uTime"/>
+                    <result column="is_del" property="isDel"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, title, belong, i18n_key, type, code, component, hide_menu, constant, icon, path, parent_id, sort, creator, updater, status, c_time, u_time, is_del
+        </sql>
+
+    <sql id="TableName">
+        sys_resource_next
+    </sql>
+
+    <select id="queryListQueryWrapper_mpCount" resultType="java.lang.Long">
+        SELECT count(*) FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="queryListQueryWrapper" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="TableName"/>
+        t
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

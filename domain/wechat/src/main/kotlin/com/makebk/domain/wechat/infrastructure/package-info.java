@@ -1,0 +1,1 @@
+package com.makebk.domain.wechat.infrastructure;
