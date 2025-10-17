@@ -1,51 +1,65 @@
 name: magicDog Actions
+
 on:
-  label:
-    types:
-      - created
   push:
     branches:
       - main
+  # 也可以保留 label 触发器
+  label:
+    types:
+      - created
+
 jobs:
   build:
     strategy:
       matrix:
+        # 保持 windows-11-arm
         os: [ windows-11-arm ]
-#        os: [ windows-latest , windows-11-arm ]
-    name: ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-#    container:
-#      image: docker.1ms.run/catthehacker/ubuntu:act-22.04
-#      volumes:
-#        - ubuntu_hostedtoolcache:/opt/hostedtoolcache
-    steps:
-      - run: echo "🍎 当前时间" & date
-      - uses: actions/checkout@v5
 
-      - uses: graalvm/setup-graalvm@v1
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Display current time
+        run: echo "🍎 当前时间 $(Get-Date)" # 使用 PowerShell 的 Get-Date
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 步骤 1: 设置 Oracle GraalVM for JDK
+      - name: Set up GraalVM
+        uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
-          distribution: 'gds'
+
+          # 关键修正: 使用 'graalvm-for-jdk' 来指定 Oracle GraalVM
+          distribution: 'graalvm-for-jdk'
+
           components: 'native-image'
           cache: 'gradle'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build native image
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          job-id: jdk21
-          arguments: nativeCompile
-          gradle-version: wrapper
+      # 步骤 2: (推荐) 验证安装
+      - name: Verify GraalVM installation
+        run: |
+          java -version
+          native-image --version
 
-      - name: Make staging directory
+      # 步骤 3: 使用 run 命令直接构建，而不是用 gradle/actions/setup-gradle
+      - name: Build Native Image with Gradle
+        run: ./gradlew.bat nativeCompile
+
+      - name: Create staging directory
         run: mkdir staging
 
+      # 步骤 4: 修正 Windows 上的文件复制命令
       - name: Copy native bundles to staging
-        run: |
-          cp -r modules\server\build\native\nativeCompile\* staging
-      - name: Upload
+        # 在 Windows 上，使用 'copy' 命令而不是 'cp'
+        run: copy modules\server\build\native\nativeCompile\* staging
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Server-Windows
+          name: Server-Windows-ARM64
           path: staging
           retention-days: 1
