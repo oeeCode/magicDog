@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        # 强制要求：原生镜像构建必须在与目标平台和架构完全一致的 runner 上执行。
+        # 关键要求：原生镜像构建必须在与目标平台和架构完全一致的 runner 上执行。
         os: [ windows-11-arm ]
 
     name: Build on ${{ matrix.os }}
@@ -30,6 +30,7 @@ jobs:
         uses: graalvm/setup-graalvm@v1
         with:
           # 关键修正：指定 'liberica' 发行版，以获取对 Windows on ARM64 的支持。
+          # 这是解决 "Unable to find asset" 错误的核心。
           distribution: 'liberica'
           java-version: '21'
           components: 'native-image'
@@ -44,7 +45,7 @@ jobs:
 
       # 步骤 3: 使用 Gradle 构建原生镜像
       - name: Build Native Image with Gradle
-        run:./gradlew.bat nativeCompile
+        run: ./gradlew.bat nativeCompile
 
       # 步骤 4: 创建用于存放构建产物的目录
       - name: Create staging directory
@@ -52,7 +53,7 @@ jobs:
 
       # 步骤 5: 将原生可执行文件复制到 staging 目录
       - name: Copy native bundles to staging
-        # 语法修正：使用正确的 Windows 'copy' 命令和通配符路径。
+        # 语法修正：将原始文件中错误的多行命令更正为单行，并使用正确的 Windows 'copy' 命令。
         run: copy modules\server\build\native\nativeCompile\* staging
 
       # 步骤 6: 上传构建产物
